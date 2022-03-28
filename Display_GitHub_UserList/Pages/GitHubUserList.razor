@@ -1,0 +1,73 @@
+﻿@page "/GitHubUserList"
+@using System.Net
+@using System.Text.Json
+@using System.Text.Json.Serialization;
+@inject IHttpClientFactory ClientFactory
+<h3>GitHubUserList</h3>
+
+<p>This is a test for display.</p>
+
+<h1>Call web API from a Blazor Server Razor component</h1>
+
+@if (getBranchesError)
+{
+    <p>Unable to get branches from GitHub. Please try again later.</p>
+}
+else
+{
+    <ul>
+        <li>@usersJSON.Count().ToString();</li>
+        @foreach (var users in usersJSON)
+        {             
+            <li>@users.login.ToString()</li>
+            <img src="@users.avatar_url" with="600" heigh="400" alt="avatar_url">
+            <li>@users.site_admin.ToString()</li>
+
+        }
+    </ul>
+}
+
+@code {
+    private IEnumerable<GitHubUsers> usersJSON = Array.Empty<GitHubUsers>();
+    private bool getBranchesError;
+    private bool shouldRender;
+
+
+    protected override bool ShouldRender() => shouldRender;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var request = new HttpRequestMessage(HttpMethod.Get,
+            "https://api.github.com/users");
+        request.Headers.Add("Accept", "application/vnd.github.v3+json");
+        request.Headers.Add("User-Agent", "HttpClientFactory-Sample");
+
+        var client = ClientFactory.CreateClient();
+
+        var response = await client.SendAsync(request);
+
+        if (response.IsSuccessStatusCode)
+        {
+            using var responseStream = await response.Content.ReadAsStreamAsync();
+            usersJSON = await JsonSerializer.DeserializeAsync
+                <IEnumerable<GitHubUsers>>(responseStream);
+ 
+        }
+        else
+        {
+            getBranchesError = true;
+        }
+
+        shouldRender = true;
+    }
+
+    public class GitHubUsers
+    {
+        [JsonPropertyName("avatar_url")]
+        public string avatar_url { get; set; }
+        [JsonPropertyName("login")]
+        public string login { get; set; }
+        [JsonPropertyName("site_admin")]
+        public bool site_admin { get; set; }
+    }
+}

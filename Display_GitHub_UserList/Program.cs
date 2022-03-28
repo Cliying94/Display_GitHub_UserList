@@ -15,7 +15,9 @@ namespace Display_GitHub_UserList
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
+
         }
+
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
@@ -24,5 +26,6 @@ namespace Display_GitHub_UserList
                     webBuilder.UseElectron(args);
                     webBuilder.UseStartup<Startup>();
                 });
+
     }
 }
