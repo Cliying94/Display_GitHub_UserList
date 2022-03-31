@@ -48,3 +48,31 @@ a, .btn-link {
         right: 0.75rem;
         top: 0.5rem;
     }
+
+.user {
+    border-bottom-style: solid;
+    border-color: #eee;
+    border-radius: 150px;
+    display: flex;
+}
+
+.user_img {
+    width:150px;
+    height:150px;
+    border-radius: 150px;
+    margin: 10px 10px 10px 10px;
+}
+
+.admin_badge {    
+    border:2px;
+    color:#ccc; 
+    border-style:solid;
+    border-radius:10px;
+    width:55px;
+    height:30px;
+    background-color:#8600ff; 
+    margin: auto;    
+}
+.admin_badge p{
+    margin:auto;
+}

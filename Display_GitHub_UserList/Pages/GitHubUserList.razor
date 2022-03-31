@@ -5,10 +5,6 @@
 @inject IHttpClientFactory ClientFactory
 <h3>GitHubUserList</h3>
 
-<p>This is a test for display.</p>
-
-<h1>Call web API from a Blazor Server Razor component</h1>
-
 @if (getBranchesError)
 {
     <p>Unable to get branches from GitHub. Please try again later.</p>
@@ -16,16 +12,20 @@
 else
 {
     <ul>
-        <li>@usersJSON.Count().ToString();</li>
+        <li>Nymber of users :@usersJSON.Count().ToString();</li>
         @foreach (var users in usersJSON)
-        {             
-            <li>@users.login.ToString()</li>
-            <img src="@users.avatar_url" with="600" heigh="400" alt="avatar_url">
-            <li>@users.site_admin.ToString()</li>
+        {  
+            <div class="user" >
+                <img class="user_img" src="@users.avatar_url" alt="avatar_url">
+                <p class="username" style="margin:auto">@users.login.ToString()</p>
+            @if(@users.site_admin==true){<div class="admin_badge" ><p>Admin</p></div>}
+            </div>
 
         }
     </ul>
 }
+
+
 
 @code {
     private IEnumerable<GitHubUsers> usersJSON = Array.Empty<GitHubUsers>();
