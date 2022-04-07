@@ -1,4 +1,3 @@
-using Display_GitHub_UserList.Data;
 using ElectronNET.API;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
@@ -29,7 +28,6 @@ namespace Display_GitHub_UserList
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<WeatherForecastService>();
             services.AddHttpClient();
         }
 
