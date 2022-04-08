@@ -3,17 +3,19 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <base href="~/" />
 </head>
+<link rel="stylesheet" type="text/css" href="/css/_Layout.css" />
 <body>
     <div class="page">
         <div class="sidebar">
         </div>
-
         <div class="main">
             <div class="content px-4">
                 @RenderBody()
             </div>
         </div>
     </div>
+    <script src="_framework/blazor.server.js"></script>
 </body>
 </html>

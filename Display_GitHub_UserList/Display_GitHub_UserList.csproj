@@ -17,4 +17,8 @@
     <Folder Include="Properties\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\css\_Layout.css" />
+  </ItemGroup>
+
 </Project>
